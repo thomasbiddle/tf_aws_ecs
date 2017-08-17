@@ -15,5 +15,5 @@ output "ecs_security_group" {
 }
 
 output "ecs_iam_role_arn" {
-  value = ${aws_iam_role.ecs-role.arn}"
+  value = "${aws_iam_role.ecs-role.arn}"
 }
