@@ -63,11 +63,6 @@ variable "security_group_ids" {
   default     = []
 }
 
-variable "servers" {
-  default     = "1"
-  description = "The number of servers to launch."
-}
-
 variable "subnet_id" {
   type        = "list"
   description = "The AWS Subnet ID in which you want to delpoy your instances"

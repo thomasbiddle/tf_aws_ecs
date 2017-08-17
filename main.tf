@@ -52,7 +52,6 @@ resource "aws_autoscaling_group" "ecs" {
   launch_configuration = "${aws_launch_configuration.ecs.name}"
   min_size             = "${var.min_instances}"
   max_size             = "${var.max_instances}"
-  desired_capacity     = "${var.servers}"
   termination_policies = ["OldestLaunchConfiguration", "ClosestToNextInstanceHour", "Default"]
 
   tags = [{
