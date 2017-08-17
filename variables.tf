@@ -1,9 +1,3 @@
-variable "allowed_cidr_blocks" {
-  default     = ["0.0.0.0/0"]
-  type        = "list"
-  description = "List of subnets to allow into the ECS Security Group. Defaults to ['0.0.0.0/0']"
-}
-
 variable "name_prefix" {
   default = ""
 }
@@ -50,6 +44,7 @@ variable "instance_type" {
 }
 
 variable "key_name" {
+  default     = ""
   description = "SSH key name in your AWS account for AWS instances."
 }
 
@@ -89,4 +84,12 @@ variable "vpc_id" {
 
 variable "associate_public_ip_address" {
   default = false
+}
+
+variable "min_instances" {
+  default = 1
+}
+
+variable "max_instances"{
+  default = 10
 }

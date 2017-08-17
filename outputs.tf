@@ -9,3 +9,7 @@ output "autoscaling_group" {
     arn  = "${aws_autoscaling_group.ecs.arn}"
   }
 }
+
+output "ecs_security_group" {
+  value = "${aws_security_group.ecs.id}"
+}
