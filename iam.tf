@@ -24,45 +24,10 @@ resource "aws_iam_role" "ecs-role" {
 EOF
 }
 
-# It may be useful to add the following for troubleshooting the InstanceStatus
-# Health check if using the fitnesskeeper/consul docker image
-# "ec2:Describe*",
-# "autoscaling:Describe*",
-
-resource "aws_iam_policy" "ecs-policy" {
-  name        = "tf-created-AmazonECSContainerInstancePolicy-${var.name}"
-  description = "A terraform created policy for ECS"
-
-  policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Action": [
-        "ecs:CreateCluster",
-        "ecs:DeregisterContainerInstance",
-        "ecs:DiscoverPollEndpoint",
-        "ecs:Poll",
-        "ecs:RegisterContainerInstance",
-        "ecs:StartTelemetrySession",
-        "ecs:Submit*",
-        "ecr:GetAuthorizationToken",
-        "ecr:BatchCheckLayerAvailability",
-        "ecr:GetDownloadUrlForLayer",
-        "ecr:BatchGetImage",
-        "logs:CreateLogStream",
-        "logs:PutLogEvents"
-      ],
-      "Resource": "*"
-    }
-  ]
-}
-EOF
-}
-
 resource "aws_iam_policy_attachment" "attach-ecs" {
   name       = "ecs-attachment"
   roles      = ["${aws_iam_role.ecs-role.name}"]
-  policy_arn = "${aws_iam_policy.ecs-policy.arn}"
+
+  # AWS's Managed - Default policy for the Amazon EC2 Role for Amazon EC2 Container Service.
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role"
 }
